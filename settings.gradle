@@ -7,5 +7,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "AndroidMonitor"
-include ':app'
 include ':monitor-android-core'
