@@ -11,20 +11,17 @@ import android.util.Log
 class DumpRunnable : Runnable {
 
     override fun run() {
-        val msg = """
-            ---------------------> Monitor.TAG START <---------------------
-            ${dump()}
-            ---------------------> Monitor.TAG END <---------------------
-        """.trimIndent()
-        Log.d(Monitor.TAG, msg)
+        Log.d(Monitor.TAG, dump())
     }
 
     private fun dump(): String {
         val stackTrace = Looper.getMainLooper().thread.stackTrace
         val sb = StringBuilder()
+        sb.append("---------------------> Monitor.TAG START <---------------------\n")
         for (s in stackTrace) {
             sb.append(s.toString().trim() + "\n");
         }
+        sb.append("---------------------> Monitor.TAG END <---------------------")
         return sb.toString()
     }
 

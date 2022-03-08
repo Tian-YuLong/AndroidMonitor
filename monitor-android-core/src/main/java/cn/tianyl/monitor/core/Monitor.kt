@@ -10,7 +10,7 @@ import cn.tianyl.monitor.core.evilmethod.EvilMethodCanary
  * @author tianyl
  * @since 2022/3/7
  */
-object Monitor {
+public object Monitor {
 
     val vsyncMs = 16L
     val TAG = "Monitor-Log"
