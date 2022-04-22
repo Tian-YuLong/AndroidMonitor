@@ -13,5 +13,6 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Monitor.init(this)
+//        HookHelper.hackActivityThreadH()
     }
 }

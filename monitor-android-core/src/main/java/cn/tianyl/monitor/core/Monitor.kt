@@ -10,7 +10,7 @@ import cn.tianyl.monitor.core.evilmethod.EvilMethodCanary
  * @author tianyl
  * @since 2022/3/7
  */
-object Monitor {
+public object Monitor {
 
     val vsyncMs = 16L
     val TAG = "Monitor-Log"
@@ -26,12 +26,12 @@ object Monitor {
 
     private var monitorRunning = false
 
-    val evilThresholdMs = 1000L
+    val evilThresholdMs = 100L
 
     fun init(app: Application) {
         this.app = app
         this.mainLooper = app.mainLooper
-
+        app.registerActivityLifecycleCallbacks(EvilMethodCanary)
         monitorThread.start()
         startMonitor(app)
     }
@@ -40,7 +40,7 @@ object Monitor {
         if (!monitorRunning) {
             monitorRunning = true
         }
-        EvilMethodCanary().start()
+        EvilMethodCanary.start()
     }
 
     private fun stopMonitor() {
