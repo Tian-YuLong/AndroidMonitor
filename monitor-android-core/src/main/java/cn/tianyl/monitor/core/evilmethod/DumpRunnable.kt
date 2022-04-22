@@ -1,7 +1,8 @@
-package cn.tianyl.monitor.core
+package cn.tianyl.monitor.core.evilmethod
 
 import android.os.Looper
 import android.util.Log
+import cn.tianyl.monitor.core.Monitor
 
 
 /**
@@ -11,15 +12,23 @@ import android.util.Log
 class DumpRunnable : Runnable {
 
     override fun run() {
-        Log.d(Monitor.TAG, dump())
+        val msg = dump()
+        if (msg.isNotEmpty()) {
+            Log.d(Monitor.TAG, msg)
+        }
     }
 
     private fun dump(): String {
         val stackTrace = Looper.getMainLooper().thread.stackTrace
         val sb = StringBuilder()
+        sb.append("--------------------->\n")
         sb.append("---------------------> Monitor.TAG START <---------------------\n")
         for (s in stackTrace) {
-            sb.append(s.toString().trim() + "\n");
+            if (!EvilMethodCanary.filter(s.toString())) {
+                sb.append(s.toString().trim() + "\n");
+            } else {
+                return ""
+            }
         }
         sb.append("---------------------> Monitor.TAG END <---------------------")
         return sb.toString()

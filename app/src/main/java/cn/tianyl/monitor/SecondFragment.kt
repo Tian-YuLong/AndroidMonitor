@@ -27,7 +27,6 @@ class SecondFragment : Fragment() {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
 //        Log.d("--------------------->","开始sleep")
-        Thread.sleep(1000)
 //        Log.d("--------------------->","结束sleep")
 
         return binding.root
